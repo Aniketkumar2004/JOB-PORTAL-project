@@ -6,7 +6,8 @@ const initialState = {
   singleJob: null, // This will hold the job details when a user clicks on a job
   searchJobByText: "",
   allAppliedJobs: [], // This will hold
-  searchedQuery: "",
+  searchedQuery: [],
+  savedJobs: [], // New state to hold saved jobs
 };
 
 const jobSlice = createSlice({
@@ -31,6 +32,22 @@ const jobSlice = createSlice({
     setSearchedQuery(state, action) {
       state.searchedQuery = action.payload;
     },
+    saveJob(state, action) {
+      const job = action.payload;
+      if (!state.savedJobs) {
+        state.savedJobs = [];
+      }
+      const existingIndex = state.savedJobs.findIndex(
+        (savedJob) => savedJob._id === job._id
+      );
+      if (existingIndex >= 0) {
+        // If already saved, remove it (toggle off)
+        state.savedJobs.splice(existingIndex, 1);
+      } else {
+        // If not saved, add it
+        state.savedJobs.push(job);
+      }
+    },
   },
 });
 
@@ -41,5 +58,6 @@ export const {
   setSearchJobByText,
   setAllAppliedJobs,
   setSearchedQuery,
+  saveJob,
 } = jobSlice.actions;
 export default jobSlice.reducer;

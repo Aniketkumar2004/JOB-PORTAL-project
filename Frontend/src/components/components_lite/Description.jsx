@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { JOB_API_ENDPOINT, APPLICATION_API_ENDPOINT } from "@/utils/data";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setSingleJob } from "@/redux/jobSlice";
 import { toast } from "sonner";
+import { ArrowLeft } from "lucide-react";
+import RecommendedJobs from "./RecommendedJobs";
 
 const Description = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const jobId = params.id;
 
@@ -25,6 +28,11 @@ const Description = () => {
   const [isApplied, setIsApplied] = useState(isIntiallyApplied);
 
   const applyJobHandler = async () => {
+    if (!user) {
+      toast.error("Please login to apply for this job");
+      navigate("/login");
+      return;
+    }
     try {
       const res = await axios.get(
         `${APPLICATION_API_ENDPOINT}/apply/${jobId}`,
@@ -83,30 +91,34 @@ const Description = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto my-10 ">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto my-10 px-4 md:px-8">
+        <Button onClick={() => navigate(-1)} variant="ghost" className="mb-4 flex items-center gap-2 text-gray-600">
+           <ArrowLeft size={18} />
+           Back
+        </Button>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
           <div>
-            <h1 className="font-bold text-xl ">{singleJob?.title}</h1>
-            <div className=" flex gap-2 items-center mt-4 ">
-              <Badge className={" text-blue-600 font-bold"} variant={"ghost"}>
+            <h1 className="font-bold text-xl">{singleJob?.title}</h1>
+            <div className="flex flex-wrap gap-2 items-center mt-4">
+              <Badge className={"text-blue-600 font-bold"} variant={"ghost"}>
                 {singleJob?.position} Open Positions
               </Badge>
-              <Badge className={" text-[#FA4F09] font-bold"} variant={"ghost"}>
+              <Badge className={"text-[#FA4F09] font-bold"} variant={"ghost"}>
                 {singleJob?.salary}LPA
               </Badge>
-              <Badge className={" text-[#6B3AC2]  font-bold"} variant={"ghost"}>
+              <Badge className={"text-[#6B3AC2] font-bold"} variant={"ghost"}>
                 {singleJob?.location}
               </Badge>
-              <Badge className={" text-black font-bold"} variant={"ghost"}>
+              <Badge className={"text-black font-bold"} variant={"ghost"}>
                 {singleJob?.jobType}
               </Badge>
             </div>
           </div>
-          <div>
+          <div className="w-full md:w-auto mt-4 md:mt-0">
             <Button
               onClick={isApplied ? null : applyJobHandler}
               disabled={isApplied}
-              className={`rounded-lg ${
+              className={`rounded-lg w-full md:w-auto ${
                 isApplied
                   ? "bg-gray-600 cursor-not-allowed"
                   : "bg-[#6B3AC2] hover:bg-[#552d9b]"
@@ -164,6 +176,8 @@ const Description = () => {
             </span>
           </h1>
         </div>
+
+        <RecommendedJobs jobId={jobId} />
       </div>
     </div>
   );

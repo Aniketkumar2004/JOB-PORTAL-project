@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "./components/components_lite/Navbar";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
+import VerifyOtp from "./components/authentication/VerifyOtp";
+import ResetPassword from "./components/authentication/ResetPassword";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/components_lite/Home";
 import PrivacyPolicy from "./components/components_lite/PrivacyPolicy.jsx";
@@ -17,7 +19,8 @@ import AdminJobs from "./components/admincomponent/AdminJobs.jsx";
 import PostJob from "./components/admincomponent/PostJob";
 import Applicants from "./components/admincomponent/Applicants";
 import ProtectedRoute from "./components/admincomponent/ProtectedRoute";
-import Creator from "./components/creator/Creator.jsx";
+import SavedJobs from "./components/components_lite/SavedJobs.jsx";
+import TermsAndConditions from "./components/components_lite/TermsAndConditions.jsx";
 
 const appRouter = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -28,6 +31,14 @@ const appRouter = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/verify-otp",
+    element: <VerifyOtp />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ResetPassword />,
   },
   {
     path: "/description/:id",
@@ -58,8 +69,12 @@ const appRouter = createBrowserRouter([
     element: <Browse />,
   },
   {
-    path:"/Creator",
-    element: <Creator/>
+    path: "/saved-jobs",
+    element: <SavedJobs />,
+  },
+  {
+    path: "/terms",
+    element: <TermsAndConditions />,
   },
 
   // /admin

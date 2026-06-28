@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "@/redux/jobSlice";
 
@@ -44,36 +43,52 @@ const filterData = [
 ];
 
 const Filter = () => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const handleChange = (value) => {
-    setSelectedValue(value);
-  };
+  const [selectedValues, setSelectedValues] = useState([]);
   const dispatch = useDispatch();
+
+  const handleChange = (value) => {
+    setSelectedValues((prev) => {
+      if (prev.includes(value)) {
+        return prev.filter((item) => item !== value);
+      } else {
+        return [...prev, value];
+      }
+    });
+  };
+
   useEffect(() => {
-    dispatch(setSearchedQuery(selectedValue));
-  }, [selectedValue]);
+    dispatch(setSearchedQuery(selectedValues));
+  }, [selectedValues, dispatch]);
 
   return (
     <div className="w-full bg-white rounded-md">
       <h1 className="font-bold text-lg">Filter Jobs</h1>
       <hr className="mt-3" />
-      <RadioGroup value={selectedValue} onValueChange={handleChange}>
+      <div className="mt-5">
         {filterData.map((data, index) => (
-          <div key={index}>
-            <h2 className="font-bold text-lg">{data.filterType}</h2>
-
+          <div key={index} className="mb-4">
+            <h2 className="font-bold text-lg mb-2">{data.filterType}</h2>
             {data.array.map((item, indx) => {
               const itemId = `Id${index}-${indx}`;
               return (
                 <div key={itemId} className="flex items-center space-x-2 my-2">
-                  <RadioGroupItem value={item} id={itemId}></RadioGroupItem>
-                  <label htmlFor={itemId}>{item}</label>
+                  <input
+                    type="checkbox"
+                    id={itemId}
+                    value={item}
+                    checked={selectedValues.includes(item)}
+                    onChange={() => handleChange(item)}
+                    className="w-4 h-4 text-[#6B3AC2] border-gray-300 rounded focus:ring-[#6B3AC2] cursor-pointer"
+                  />
+                  <label htmlFor={itemId} className="cursor-pointer text-gray-700">
+                    {item}
+                  </label>
                 </div>
               );
             })}
           </div>
         ))}
-      </RadioGroup>
+      </div>
     </div>
   );
 };

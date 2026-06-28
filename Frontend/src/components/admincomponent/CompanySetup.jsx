@@ -88,9 +88,9 @@ const CompanySetup = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-xl mx-auto my-10">
+      <div className="max-w-xl mx-auto my-10 px-4 md:px-0">
         <form onSubmit={submitHandler}>
-          <div className="flex items-center gap-5 p-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 sm:p-8">
             <Button
               onClick={() => navigate("/admin/companies")}
               variant="outline"
@@ -99,9 +99,9 @@ const CompanySetup = () => {
               <ArrowLeft />
               <span>Back</span>
             </Button>
-            <h1 className="font-bold text-xl">Company Setup</h1>
+            <h1 className="font-bold text-xl mt-2 sm:mt-0">Company Setup</h1>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <Label>Company Name</Label>
               <Input

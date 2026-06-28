@@ -19,15 +19,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    pancard: {
-      type: String,
-      required: true,
-      unique: true,
+    isVerified: {
+      type: Boolean,
+      default: false,
     },
-    adharcard: {
+    otp: {
       type: String,
-      required: true,
-      unique: true,
+    },
+    otpExpiry: {
+      type: Date,
     },
     role: {
       type: String,
@@ -43,19 +43,19 @@ const userSchema = new mongoose.Schema(
       resume: {
         type: String, // URL to resume file
       },
-      resumeOriginalname: {
-        type: String, // Original name of resume file
-      },
       company: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Company",
       },
-      profilePhoto: {
-        type: String, // URL to profile photo file
-        default: "",
+        profilePhoto: {
+          type: String, // URL to profile photo file
+          default: "",
+        },
+      },
+      termsAcceptedAt: {
+        type: Date,
       },
     },
-  },
   { timestamps: true }
 );
 

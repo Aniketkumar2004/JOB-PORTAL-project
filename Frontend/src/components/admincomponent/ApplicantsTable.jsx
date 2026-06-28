@@ -46,7 +46,7 @@ const ApplicantsTable = () => {
             <TableHead>FullName</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Contact</TableHead>
-            <TableHead>Resume</TableHead>
+            <TableHead>Resume / Portfolio</TableHead>
             <TableHead>Date</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
@@ -61,13 +61,12 @@ const ApplicantsTable = () => {
                 <TableCell>
                   {item.applicant?.profile?.resume ? (
                     <a
-                      className="text-blue-600 cursor-pointer"
+                      className="text-blue-600 hover:underline cursor-pointer"
                       href={item?.applicant?.profile?.resume}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Download
-                      {/* {item?.applicant?.profile?.resume} */}
+                      View Link
                     </a>
                   ) : (
                     <span>NA</span>
