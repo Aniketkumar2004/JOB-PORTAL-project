@@ -146,7 +146,7 @@ Start the backend:
 ```bash
 npm run dev
 ```
-The server runs at **http://localhost:5011**
+The server runs at **https://job-portal-project-uhjk.onrender.com**
 
 > **Note:** Set `NODE_ENV = development` while developing locally so the backend does not try to serve the production frontend build.
 
@@ -159,10 +159,10 @@ cd Frontend
 npm install
 npm run dev
 ```
-The app runs at **http://localhost:5173**
+The app runs at **https://job-portal-project-uhjk.onrender.com**
 
 The frontend talks to the backend using the URLs in `Frontend/src/utils/data.js`
-(default `http://localhost:5011`). Change those if your backend runs on a different host/port.
+(default `https://job-portal-project-uhjk.onrender.com`). Change those if your backend runs on a different host/port.
 
 ---
 
@@ -170,7 +170,7 @@ The frontend talks to the backend using the URLs in `Frontend/src/utils/data.js`
 
 | Step | Command | Folder | URL |
 |------|---------|--------|-----|
-| 1. Start backend | `npm run dev` | `Backend/` | http://localhost:5011 |
+| 1. Start backend | `npm run dev` | `Backend/` | https://job-portal-project-uhjk.onrender.com |
 | 2. Start frontend | `npm run dev` | `Frontend/` | http://localhost:5173 |
 
 Open **http://localhost:5173** in your browser. 🎉
@@ -196,7 +196,7 @@ Open **http://localhost:5173** in your browser. 🎉
 
 ## 🌐 Main API Endpoints
 
-Base URL: `http://localhost:5011`
+Base URL: `https://job-portal-project-uhjk.onrender.com`
 
 ### User (`/api/user`)
 | Method | Endpoint | Description |
