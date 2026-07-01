@@ -24,7 +24,7 @@ const Header = () => {
               {" "}
               <PiBuildingOfficeBold />
             </span>{" "}
-            No.1 Job Hunt Website
+           Get Hired with Hire Me - Your Ultimate Job Portal
           </span>
 
           <h2 className="text-3xl md:text-5xl font-bold leading-tight">
