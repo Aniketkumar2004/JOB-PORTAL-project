@@ -24,7 +24,7 @@ const allowedOrigins = (process.env.CORS_ORIGIN || "")
   .filter(Boolean);
 
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: "https://job-portal-project-ootxhgivj-aniket-job-portal.vercel.app",
   credentials: true,
 };
 
